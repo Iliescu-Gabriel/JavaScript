@@ -27,6 +27,7 @@ function startGame() {
   for (let i = 0; i < n; i++) {
     let button = document.createElement("BUTTON");
     button.id = i;
+    button.classList.add("game-button");
     button.setAttribute("type", "button");
     button.addEventListener("click", () => {
       evalChosenButton(button.id, winningButton);
