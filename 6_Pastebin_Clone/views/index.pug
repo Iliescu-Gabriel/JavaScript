@@ -1,0 +1,43 @@
+extends layout
+
+block content
+    //- Pastes form part
+    - const formStyle = {"width": "500px", "margin": "auto"}  
+
+    form(action='/' method='post' style = formStyle class='card text-center mb-5 mt-5')
+      h5(class='card-header bg-dark text-light') Create New Paste
+      section.card-body
+        h5 Paste title
+        input(value='' type = "text" name = "pasteTitle" placeholder = "Type your title here" class='form-control ')   
+        br
+        h5 Text:
+        textarea(value='' name = "pasteText"  placeholder = "Type your text here" style = {"height" : "100px"} class='form-control')
+      section.card-footer 
+        button(type = "submit" value='Submit' class='btn btn-primary').
+          Submit
+      if(pasteDeleteError)
+        p THE PASTE THAT YOU WANT TO DELETE WAS NOT FOUND!
+      if(addPasteSuccess)
+        p The paste was added succesfully!
+      if(deletePasteSuccess)
+        p The paste was deleted succesfully!
+    //- Show pastes part
+    article(style = {"margin": "auto", "min-height":"100vh"} class='album py-5 bg-light')
+      section(class="container")
+        div(class="row") 
+          each paste in pastes
+            section(class="col-md-4")
+              div(class="card mb-4 box-shadow")
+                div(class="card-header bg-dark text-light" style="text-align:center")
+                  h5= paste.pasteTitle
+                div(class="card-body")
+                  h5= paste.pasteText
+                  div(class="d-flex justify-content-between align-items-center")
+                    div(class="btn-group")
+                      form(action="/G"+paste._id, method="get" )
+                        input(type="submit" class="btn btn-sm btn-outline-secondary" value='Edit')
+                      form(action="/D"+paste._id, method="get" )
+                        input(type="submit" value='Delete' class="btn btn-sm btn-outline-danger")
+                    <small class="text-muted">9 mins</small>                  
+          else 
+            p(class="text-center") No pastes found!

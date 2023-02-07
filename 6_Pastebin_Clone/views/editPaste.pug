@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  form(action='/E'+paste._id method='post' class='text-center container' style = {"width" : "500px"})
+    article.card 
+      h5(class='card-header bg-dark text-light') Edit Paste
+      section(class='card-body') 
+        div 
+          label(for = "pasteTitle")
+            h5 Paste name: 
+          input(type="text" name="pasteTitle" class='paste-edit-name' value=paste.pasteTitle)
+        br
+        h5 Text
+        textarea(name="pasteText" class='form-control' style = {"height":"100px"})= paste.pasteText
+      div(class="d-flex justify-content-center align-items-center")
+        div(class="btn-group pb-3")
+          button(type = "submit" class='btn btn-primary') Apply edit 
+          a(href="/" class='btn btn-outline-secondary') Back to pastes
+      if(editPasteSuccess)
+        p Edit successful
