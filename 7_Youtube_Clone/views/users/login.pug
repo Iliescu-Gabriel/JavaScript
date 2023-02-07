@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+  main(class="form-signin text-center flex").bg-dark.mt-5
+    form(action="/users/login" method="POST")
+      h1.text-light Login
+      br
+      h1(class="h3 mb-3 fw-normal text-light") Enter credentials
+      div(class="form-floating")
+        input(type="email" class="form-control" name='email' id="floatingInput" placeholder="name@example.com")
+        label(for="floatingInput") Email address
+      div(class="form-floating")
+        input(type="password" class="form-control" name='password' id="floatingPassword" placeholder="Password")
+        label(for="floatingPassword") Password
+      br
+      button(class="w-100 btn btn-lg btn-warning" type="submit") Login
+      a(href="/")
+        button.btn.btn-lg.w-100.btn-outline-light.me-2(type='button') Back to main page
+    if(msg)
+      br
+      p.text-light #{msg}

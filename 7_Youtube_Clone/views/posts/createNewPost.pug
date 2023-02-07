@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  main(class="form-signin text-center flex").bg-dark.mt-5
+    form(action="/posts/newPost" method="POST" enctype='multipart/form-data')
+      h1(class="h3 mb-3 fw-normal text-light") Create new post
+      p.text-light.m-0 Upload video
+      input(type='file', name='video' accept='video/*').form-control.mb-4
+      div(class="form-floating")
+        input(type="text" class="form-control" name="title" id="title" placeholder="asd")
+        label(for="title") Post title  
+      br
+      div(class="form-floating")
+        textarea(id="comment", name="comment", style = {"height" : "100px"} class='form-control' placeholder="asd")
+        label(for="comment") Post comment
+      br
+      button(class="w-100 btn btn-lg btn-warning" type="submit") Submit Post
+      a(href="/")
+        button.btn.btn-lg.w-100.btn-outline-light.me-2(type='button') Back to main page
+    if(msg)
+      br
+      p.text-light #{msg}

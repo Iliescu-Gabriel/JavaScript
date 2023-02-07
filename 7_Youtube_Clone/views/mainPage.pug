@@ -1,0 +1,47 @@
+extends layout
+
+block content
+  header.p-3.bg-dark.text-white
+    .container
+      .d-flex.flex-wrap.align-items-center.justify-content-center.justify-content-lg-start
+        a.d-flex.align-items-center.mb-2.mb-lg-0.text-white.text-decoration-none(href='/')
+          a(href='/').text-decoration-none.text-light
+            h1 Youtube Clone
+          
+        ul.nav.col-12.col-lg-auto.me-lg-auto.mb-3.justify-content-center.mb-md-0
+          //- li
+          //-   a.nav-link.px-2.text-secondary(href='#') Home
+        if(user)
+          h3.text-light.pr-5(style={margin: '10px'}) Welcome #{user}
+        .text-end
+          if(user == null)
+            a(href="/users/login")
+              button.btn.btn-outline-light.me-2(type='button') Login
+            a(href="/users/register")
+              button.btn.btn-warning(type='button') Sign-up
+          if(user)
+            a(href="/users/logout").m-2
+              button.btn.btn-warning.ml-5(type='button') Log out
+            a(href="/posts/newPost")
+              button.btn.btn-warning.ml-5(type='button') Create post
+            a(href="/posts/myPosts").m-2
+              button.btn.btn-warning.ml-5(type='button') My posts
+
+  article(style = {"margin": "auto", "min-height":"100vh"} class='album py-5')
+      section(class="container")
+        div(class="row")
+          if(allPosts.length) 
+            each post in allPosts
+              section(class="col-md-4")
+                  div(class="card mb-4 box-shadow")
+                    form(action="/posts/viewSinglePost" method="post").m-0.p-0
+                      input(type="hidden" name="postId" value=post._id)
+                      button(style="width:100%").m-0.p-0.btn.btn-outline-secondary   
+                        div(class="card-header bg-dark text-light" style="text-align:center")
+                          h5.m-0.p-0.text-light= post.title
+                        .card-body
+                          h5.text-black= post.comment
+                        .card-footer
+                          p.m-0.p-0 Created by #{post.user.name}              
+          else 
+            p.text-center.text-light No posts found!

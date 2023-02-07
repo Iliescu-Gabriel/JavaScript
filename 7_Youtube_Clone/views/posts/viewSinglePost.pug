@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  article(style = {"margin": "auto", "min-height":"100vh"} class='album py-5')
+    section(class="container")
+      div(class="row").justify-content-center
+        video(src=post.video, controls, width=640, height=440) 
+        section(class="col-md-4")
+            div(class="card box-shadow")  
+              div(class="card-header bg-dark text-light" style="text-align:center")
+                h5.m-0.p-0= post.title
+              .card-body
+                h5= post.comment
+              .card-footer
+                p.m-0.p-0 Created by #{post.user.name}
+            a(href="/").mb-5
+              button.btn.btn-lg.w-100.btn-outline-light.me-2(type='button') Back to main page
+              

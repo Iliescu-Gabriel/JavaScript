@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+  main(class="form-signin text-center flex").bg-dark.mt-5
+    form(action="/posts/editPost" method="POST")
+      h1(class="h3 mb-3 fw-normal text-light") Edit post
+      div(class="form-floating")
+        input(type="text", class="form-control", name="title", id="title", placeholder="bla") 
+        label(for="title") #{postToEdit.title}  
+      br
+      div(class="form")
+        textarea(id="comment", name="comment",  placeholder=postToEdit.comment, style = {"height" : "100px"} class='form-control')
+        label(for="comment") Post comment 
+      br
+      input(type="hidden" name="postId" value=postToEdit._id)
+      button(class="w-100 btn btn-lg btn-warning" type="submit") Submit Changes
+      a(href="/")
+        button.btn.btn-lg.w-100.btn-outline-light.me-2(type='button') Back to main page
+    if(msg)
+      br
+      p.text-light #{msg}

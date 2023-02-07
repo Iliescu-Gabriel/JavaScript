@@ -1,0 +1,30 @@
+extends ../layout
+
+block content  
+  
+  article(style = {"margin": "auto", "min-height":"100vh"} class='album py-5')
+      section(class="container")
+        div(class="row").justify-content-center
+          if(myPosts.length)
+            each post in myPosts
+              section(class="col-md-4")
+                  div(class="card box-shadow")
+                    form(action="/posts/viewSinglePost" method="post").m-0.p-0
+                      input(type="hidden" name="postId" value=post._id)
+                      button(style="width:100%").m-0.p-0.btn.btn-outline-secondary   
+                        div(class="card-header bg-dark text-light" style="text-align:center")
+                          h5.m-0.p-0.text-light= post.title
+                        .card-body
+                          h5.text-black= post.comment
+                        .card-footer
+                          p.m-0.p-0 Created by #{post.user.name}
+                  .container.text-center.mb-5
+                      form(action="/posts/postToEdit" method="post").m-2.d-inline
+                        input(type="hidden" name="postId" value=post._id)
+                        button.btn.btn-warning Edit Post
+                      form(action="/posts/deletePost" method="post").m-2.d-inline
+                        input(type="hidden" name="postId" value=post._id)
+                        button.btn.btn-danger Delete Post
+                        
+          else
+            p.text-center.text-light No posts found!
